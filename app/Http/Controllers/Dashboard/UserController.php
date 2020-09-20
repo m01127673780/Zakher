@@ -24,11 +24,7 @@ class UserController extends Controller
     // Index
     public function index(Request $request)
     {
-        $users = User::whereRoleIs('admin')->where(function ($q) use ($request) {
-            return $q->when($request->search, function ($query) use ($request) {
-                return $query->where('name', 'like', '%' . $request->search . '%');
-            });
-        })->latest()->paginate(10);
+        $users = User::whereRoleIs('admin')->latest()->get();
         return view('dashboard.admins.index', compact('users'));
     } // End of Index
 
@@ -68,21 +64,22 @@ class UserController extends Controller
         $user->attachRole('admin');
         $user->syncPermissions($request->permissions);
 
-        session()->flash('success', __('admin.added_successfully'));
-        return redirect()->route('dashboard.admins.index');
+        return redirect()->route('dashboard.admins.index')->with('success',__('admin.added_successfully'));
     } // End of Store
 
 
     // Edit
-    public function edit(User $user)
+    public function edit($id)
     {
+        $user = User::findOrFail($id);
         return view('dashboard.admins.edit', compact('user'));
     } // End of Edit
 
 
     // Update
-    public function update(Request $request, User $user)
+    public function update(Request $request, $id)
     {
+        $user = User::findOrFail($id);
 
         $request->validate([
             'name' => 'required',
@@ -107,22 +104,23 @@ class UserController extends Controller
 
         $user->update($request_data);
         $user->syncPermissions($request->permissions);
-        session()->flash('success', __('site.updated_successfully'));
-        return redirect()->route('dashboard.admins.index');
+
+        return redirect()->route('dashboard.admins.index')->with('success',__('admin.updated_successfully'));
+
     } // End of Update
 
 
     // Delete
-    public function destroy(User $user)
+    public function destroy($id)
     {
+        $user = User::findOrFail($id);
 
         if ($user->image != 'avatar.png') {
             File::delete('uploads/admins_images/' . $user->image);
         } //end of if
 
         $user->delete();
-        session()->flash('success', __('site.deleted_successfully'));
-        return redirect()->route('dashboard.admins.index');
+        return redirect()->route('dashboard.admins.index')->with('success',__('admin.deleted_successfully'));
     } // End of Delete
 
 

@@ -15,8 +15,8 @@ class Controller extends BaseController
     public function __construct(){
 
         $this->middleware(function($request, $next){
-            if (session('success_message')){
-                Alert::success(__('admin.success_message'), session('success_message'));
+            if (session('success')){
+                Alert::success(session('success'));
             }
 
             return $next($request);

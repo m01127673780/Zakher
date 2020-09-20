@@ -42,11 +42,15 @@ return [
     'success_message' => 'Success Message',
     'login' => 'Login',
     'logout' => 'Logout',
-    '' => '',
-    '' => '',
-    '' => '',
-    '' => '',
-    '' => '',
+    'action' => 'Actions',
+    'confirm_delete' => 'Are You Sure ?',
+    'yes' => 'Yes',
+    'no' => 'No',
+    'cancel' => 'Cancel',
+    'design_departments' => 'Design Departments',
+    'departments' => 'Departments',
+    'designs' => 'Designs',
+    'home' => 'Home',
     '' => '',
     '' => '',
     '' => '',
@@ -55,18 +59,16 @@ return [
     '' => '',
     '' => '',
 
+   
+    
     'ar' => [
-        'name' => 'الاسم باللغة العربية',
-        'description' => 'الوصف باللغة العربية',
-        'address' => 'العنوان باللغة العربية',
+        'name' => 'The Name in Arabic',
+       
 
     ],
-
     'en' => [
-        'name' => 'الاسم باللغة الانجليزية',
-        'description' => 'الوصف باللغة الانجليزية',
-        'address' => 'العنوان باللغة الانجليزية',
-
+        'name' => 'The Name in English',
+       
     ],
 
 ];

@@ -4,13 +4,17 @@
     <ul class="navbar-nav">
         <li class="nav-item">
             <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
-        </li>
-        <li class="nav-item d-none d-sm-inline-block">
-            <a href="{{route('dashboard.welcome')}}" class="nav-link">@Lang('admin.dashboard')</a>
-        </li>
+        </li>        
         <li class="nav-item d-sm-inline-block pr-4 date_time">
-            <span href="#" class="nav-link"><i class="fas fa-calendar-alt"></i>
-                {{\Carbon\Carbon::now()->locale('ar_Ar')->isoFormat('dddd LL')}}</span>
+            <span href="#" class="nav-link"><i class="fas fa-calendar-alt"></i>            
+                @if (app()->getLocale() == "ar")
+                {{\Carbon\Carbon::now()->locale('ar_Ar')->isoFormat('dddd LL')}}
+                @else
+                {{\Carbon\Carbon::now()->locale('en_En')->isoFormat('dddd LL')}}
+
+                @endif
+
+            </span>
         </li>
     </ul>
 

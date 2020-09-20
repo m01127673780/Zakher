@@ -134,7 +134,9 @@ return [
     'description' => 'Site Description',
     'keywords' => 'Site Keywords',
     'logo' => 'Logo',
-    
+
+
+   
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Language Lines
@@ -152,6 +154,7 @@ return [
         ],
     ],
 
+
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Attributes
@@ -163,6 +166,19 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+
+        
+    'ar' => [
+        'name' => 'Name in Arabic',
+       
+
+    ],
+    'en' => [
+        'name' => 'Name in English',
+       
+    ],
+    
+    ],
 
 ];

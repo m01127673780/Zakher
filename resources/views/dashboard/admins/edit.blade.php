@@ -1,7 +1,7 @@
 @extends('layouts.dashboard.app')
 
 @section('title')
-@Lang('admin.edit') {{$user->name}}
+@Lang('admin.admins') | @Lang('admin.edit') {{$user->name}}
 @endsection
 
 @section('content')
@@ -66,7 +66,7 @@
                                     <div class="custom-file">
                                         <input type="file" class="custom-file-input image" name="image" id="customFile">
                                         <label class="custom-file-label"
-                                            for="customFile">@Lang('site.choose_image')</label>
+                                            for="customFile">@Lang('admin.choose_image')</label>
                                     </div>
                                     @error('image')
                                     <div class="text-danger text-bold">{{$message}}</div>
@@ -84,7 +84,7 @@
                                     <div class="card card-primary card-outline">
                                         <div class="card-body">
                                             @php
-                                            $models = ['admins'];
+                                            $models = ['admins', 'settings', 'design_departments'];
                                             $maps = ['create', 'read', 'update', 'delete'];
                                             @endphp
                                             <ul class="nav nav-tabs" id="custom-content-below-tab" role="tablist">
@@ -94,7 +94,7 @@
                                                         id="custom-content-below-home-tab" data-toggle="pill"
                                                         href="#{{ $model }}" role="tab"
                                                         aria-controls="custom-content-below-home"
-                                                        aria-selected="true">@Lang('site.' . $model)</a>
+                                                        aria-selected="true">@Lang('admin.' . $model)</a>
                                                 </li>
                                                 @endforeach
                                             </ul>
@@ -107,7 +107,7 @@
                                                     @foreach ($maps as $map)
                                                     <label><input type="checkbox" name="permissions[]"
                                                             {{ $user->hasPermission($map . '_' . $model) ? 'checked' : '' }}
-                                                            value="{{ $map . '_' . $model }}"> @lang('site.' .
+                                                            value="{{ $map . '_' . $model }}"> @lang('admin.' .
                                                         $map)</label><br>
                                                     @endforeach
                                                 </div>

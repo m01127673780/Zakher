@@ -7,14 +7,18 @@ use App\Models\Setting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Intervention\Image\Facades\Image;
-use RealRashid\SweetAlert\Facades\Alert;
 
 class SettingController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
-    }
+        //create read update delete
+        $this->middleware(['permission:read_settings'])->only('index');
+        $this->middleware(['permission:create_settings'])->only('create');
+        $this->middleware(['permission:update_settings'])->only('edit');
+        $this->middleware(['permission:delete_settings'])->only('destroy');
+    } //end of constructor
+
     // Edit
     public function edit($id)
     {
@@ -67,7 +71,7 @@ class SettingController extends Controller
 
         //session()->flash('success', __('admin.updated_successfully'));
 
-        return redirect()->route('dashboard.welcome')->withSuccessMessage(__('admin.updated_successfully'));
+        return redirect()->route('dashboard.welcome')->with('success',__('admin.updated_successfully'));
     } // End of Update
 
 }

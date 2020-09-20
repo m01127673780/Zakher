@@ -2,7 +2,12 @@
 <html dir="{{ LaravelLocalization::getCurrentLocaleDirection() }}">
 
 <head>
-    <title>@yield('title') | Home</title>
+    <title>@yield('title') | @if (app()->getLocale() == "ar")
+        {{$settings->site_title_ar}}
+        @else
+        {{$settings->site_title_en}}
+        @endif
+    </title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content=" ">
@@ -65,7 +70,7 @@
     @stack('css')
 
     @if (app()->getLocale() == "ar")
-    <link rel="stylesheet" type="text/css" type="text/css" href="{{asset('siteAssets/css/rtl.css')}}">    
+    <link rel="stylesheet" type="text/css" type="text/css" href="{{asset('siteAssets/css/rtl.css')}}">
     @endif
 
     @livewireStyles
@@ -103,9 +108,9 @@
     @else
     <script>
         $(document).ready(function () {
-           $("body").removeClass("rtl");
-       });
-   </script>
+            $("body").removeClass("rtl");
+        });
+    </script>
     <script type="text/javascript" src="{{asset('siteAssets/js/slick-custom.js')}}"></script>
     <script src="{{asset('siteAssets/js/homeSliders.js')}}"></script>
     @endif
@@ -200,7 +205,7 @@
     </script>
 
     @stack('scripts')
-    
+
     @livewireScripts
 </body>
 

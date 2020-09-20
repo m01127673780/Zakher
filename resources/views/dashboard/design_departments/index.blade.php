@@ -1,7 +1,7 @@
 @extends('layouts.dashboard.app')
 
 @section('title')
-@Lang('admin.admins')
+@Lang('admin.design_departments')
 @endsection
 
 @section('content')
@@ -10,20 +10,20 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0 text-dark mb-2">@Lang('admin.admins')<span class="mr-3 btn btn-success"
-                        style="cursor: default; font-weight: bold;">{{ $users->count() }}</span></h1>
+                <h1 class="m-0 text-dark mb-2">@Lang('admin.design_departments')<span class="mr-3 btn btn-success"
+                        style="cursor: default; font-weight: bold;">{{ $departments->count() }}</span></h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="{{route('dashboard.welcome')}}">@Lang('admin.dashboard')</a>
                     </li>
-                    <li class="breadcrumb-item active">@Lang('admin.admins')</li>
+                    <li class="breadcrumb-item active">@Lang('admin.design_departments')</li>
 
                 </ol>
             </div><!-- /.col -->
         </div><!-- /.row -->
-        @if (auth()->user()->hasPermission('create_admins'))
-        <a href="{{ route('dashboard.admins.create') }}" class="btn btn-primary"><i class="fa fa-plus"></i>
+        @if (auth()->user()->hasPermission('create_design_departments'))
+        <a href="{{ route('dashboard.design_departments.create') }}" class="btn btn-primary"><i class="fa fa-plus"></i>
             @lang('admin.add')</a>
         @else
         <a href="#" class="btn btn-primary disabled"><i class="fa fa-plus"></i> @lang('admin.add')</a>
@@ -40,33 +40,28 @@
             <div class="col-12">
                 <div class="card card-primary">
                     <div class="card-header">
-                        <h3 class="card-title">@Lang('admin.admins')</h3>
+                        <h3 class="card-title">@Lang('admin.design_departments')</h3>
                     </div>
                     <div class="card-body table-responsive p-3">
                         <!-- /.card-header -->
-                        @if($users->count() > 0)
+                        @if($departments->count() > 0)
 
                         <table class="table table-bordered text-center data_table mb-4">
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>@Lang('admin.name')</th>
-                                    <th>@Lang('admin.email')</th>
-                                    <th>@lang('admin.image')</th>
+                                    <th>@Lang('admin.name')</th>   
                                     <th>@Lang('admin.action')</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($users as $index=>$user)
+                                @foreach($departments as $index=>$department)
                                 <tr>
                                     <td class="align-middle">{{ $index + 1 }}</td>
-                                    <td class="align-middle">{{ $user->name}}</td>
-                                    <td class="align-middle">{{ $user->email}}</td>
-                                    <td class="align-middle"><img src="{{ $user->image_path }}" style="width: 80px;"
-                                            class="img-thumbnail" alt=""></td>
+                                    <td class="align-middle">{{ $department->name}}</td>                                
                                     <td class="align-middle">
-                                        @if (auth()->user()->hasPermission('update_admins'))
-                                        <a href="{{route('dashboard.admins.edit', $user->id)}}"
+                                        @if (auth()->user()->hasPermission('update_design_departments'))
+                                        <a href="{{route('dashboard.design_departments.edit', $department->id)}}"
                                             class="btn btn-info btn-sm"><i class="fa fa-edit"></i>
                                             @Lang('admin.edit')</a>
 
@@ -74,8 +69,8 @@
                                         <a href="#" class="btn btn-info btn-sm disabled"><i class="fa fa-edit"></i>
                                             @lang('admin.edit')</a>
                                         @endif
-                                        @if (auth()->user()->hasPermission('delete_admins'))
-                                        <form action="{{ route('dashboard.admins.destroy', $user->id) }}" method="post"
+                                        @if (auth()->user()->hasPermission('delete_design_departments'))
+                                        <form action="{{ route('dashboard.design_departments.destroy', $department->id) }}" method="post"
                                             style="display: inline-block">
                                             {{ csrf_field() }}
                                             {{ method_field('delete') }}

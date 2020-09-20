@@ -36,15 +36,11 @@
     <!-- Custom style for LTR -->
     <link rel="stylesheet" href="{{asset('dashboardAssets/dist/css/custom-ltr.css')}}">
     @endif
-    <!-- jQuery -->
-    <script src="{{asset('dashboardAssets/plugins/jquery/jquery.min.js')}}"></script>
-    <!--Noty-->
-    <link rel="stylesheet" href="{{asset('dashboardAssets/dist/css/noty.css')}}">
-    <script src="{{asset('dashboardAssets/dist/js/noty.js')}}"></script>
+
     <!-- DataTables -->
     <link rel="stylesheet" href="{{asset('dashboardAssets/plugins/datatables-bs4/css/dataTables.bootstrap4.css')}}">
     <link rel="stylesheet" href="{{asset('dashboardAssets/plugins/datatables-buttons/css/buttons.bootstrap4.css')}}">
-
+    @livewireStyles
 </head>
 
 <body {{-- oncontextmenu="return false;" --}} class="hold-transition sidebar-mini layout-fixed">
@@ -55,7 +51,6 @@
         @include('layouts.dashboard.includes.aside')
 
         <div class="content-wrapper">
-            @include('layouts.dashboard.includes.sessions')
 
             @yield('content')
 
@@ -63,18 +58,14 @@
 
         <footer class="main-footer">
             لوحة التحكم لموقع زاخر |
-            جميع الحقوق محفوظة &copy; @php echo date('Y'); @endphp.            
+            جميع الحقوق محفوظة &copy; @php echo date('Y'); @endphp.
         </footer>
     </div>
     <!-- ./wrapper -->
 
+    <!-- jQuery -->
+    <script src="{{asset('dashboardAssets/plugins/jquery/jquery.min.js')}}"></script>
     <script src="{{asset('dashboardAssets/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-    <!-- ChartJS -->
-    <script src="{{asset('dashboardAssets/plugins/chart.js/Chart.min.js')}}"></script>
-    <!-- Sparkline -->
-    <script src="{{asset('dashboardAssets/plugins/sparklines/sparkline.js')}}"></script>
-    <!-- jQuery Knob Chart -->
-    <script src="{{asset('dashboardAssets/plugins/jquery-knob/jquery.knob.min.js')}}"></script>
     <!-- daterangepicker -->
     <script src="{{asset('dashboardAssets/plugins/moment/moment.min.js')}}"></script>
     <script src="{{asset('dashboardAssets/plugins/daterangepicker/daterangepicker.js')}}"></script>
@@ -83,8 +74,6 @@
     </script>
     <!-- Jquery Number -->
     <script src="{{asset('dashboardAssets/dist/js/jquery.number.min.js')}}"></script>
-    <!-- Print This -->
-    <script src="{{asset('dashboardAssets/dist/js/printThis.js')}}"></script>
     <!-- overlayScrollbars -->
     <script src="{{asset('dashboardAssets/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')}}"></script>
     <!-- AdminLTE App -->
@@ -94,10 +83,11 @@
     <script src="{{asset('dashboardAssets/plugins/select2/js/select2.full.min.js')}}"></script>
     <script src="{{asset('dashboardAssets/plugins/moment/moment.min.js')}}"></script>
 
-    {{--<script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>--}}
-    {{--<script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>--}}
-    <!-- AdminLTE for demo purposes -->
-    <script src="{{asset('dashboardAssets/dist/js/demo.js')}}"></script>
+    <!-- SweetAlert -->
+    @include('sweetalert::alert')
+    <script src="{{asset('vendor/sweetalert/sweetalert.all.js')}}"></script>
+
+    <!-- Custom -->
     <script src="{{asset('dashboardAssets/dist/js/custom.js')}}"></script>
     <!-- DataTables -->
     <script src="{{asset('dashboardAssets/plugins/datatables/jquery.dataTables.js')}}"></script>
@@ -123,10 +113,32 @@
         });
     </script>
 
-    @include('sweetalert::alert')
-    
+
     @stack('scripts')
 
+    <script>
+        $(".delete").click(function (e) {
+            e.preventDefault(); // prevent form submit
+            var form = e.target.form; // storing the form
+            Swal.fire({
+                title: "@Lang('admin.confirm_delete')",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: "#28a745",
+                cancelButtonColor: "#dc3545",
+                confirmButtonText: "@Lang('admin.yes')",
+                cancelButtonText: "@Lang('admin.cancel')",
+                closeOnConfirm: false,
+                closeOnCancel: false
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit();
+                }
+            });
+        });
+    </script>
+
+    @livewireScripts
 </body>
 
 </html>

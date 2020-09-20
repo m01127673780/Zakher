@@ -19,6 +19,9 @@ Route::group(
 
             // Setting Routes    
             Route::resource('settings', 'SettingController');
+
+            // Design Departments Routes    
+            Route::resource('design_departments', 'DesignDepartmentController');
         });
         // End of Dashboard Routes
 
