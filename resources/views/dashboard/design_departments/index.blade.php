@@ -15,7 +15,7 @@
             </div><!-- /.col -->
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="{{route('dashboard.welcome')}}">@Lang('admin.dashboard')</a>
+                    <li class="breadcrumb-item"><a href="{{route('dashboard.welcome')}}">@Lang('admin.home')</a>
                     </li>
                     <li class="breadcrumb-item active">@Lang('admin.design_departments')</li>
 
@@ -50,7 +50,9 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>@Lang('admin.name')</th>   
+                                    <th>@Lang('admin.name')</th>
+                                    <th>@Lang('admin.image')</th>
+                                    <th>@Lang('admin.status')</th>
                                     <th>@Lang('admin.action')</th>
                                 </tr>
                             </thead>
@@ -58,7 +60,16 @@
                                 @foreach($departments as $index=>$department)
                                 <tr>
                                     <td class="align-middle">{{ $index + 1 }}</td>
-                                    <td class="align-middle">{{ $department->name}}</td>                                
+                                    <td class="align-middle">{{ $department->name}}</td>
+                                    <td class="align-middle"><img src="{{ $department->image_path }}" style="width: 150px;"
+                                            class="img-thumbnail" alt=""></td>
+                                    <td class="align-middle">
+                                        @if ($department->status == 1)
+                                        <span class="badge badge-success">@Lang('admin.active')</span>
+                                        @else
+                                        <span class="badge badge-danger">@Lang('admin.in_active')</span>
+                                        @endif
+                                    </td>
                                     <td class="align-middle">
                                         @if (auth()->user()->hasPermission('update_design_departments'))
                                         <a href="{{route('dashboard.design_departments.edit', $department->id)}}"
@@ -70,11 +81,12 @@
                                             @lang('admin.edit')</a>
                                         @endif
                                         @if (auth()->user()->hasPermission('delete_design_departments'))
-                                        <form action="{{ route('dashboard.design_departments.destroy', $department->id) }}" method="post"
-                                            style="display: inline-block">
+                                        <form
+                                            action="{{ route('dashboard.design_departments.destroy', $department->id) }}"
+                                            method="post" style="display: inline-block">
                                             {{ csrf_field() }}
                                             {{ method_field('delete') }}
-                                            <button  type="submit" class="btn btn-danger delete btn-sm"><i
+                                            <button type="submit" class="btn btn-danger delete btn-sm"><i
                                                     class="fa fa-trash"></i> @lang('admin.delete')</button>
                                         </form><!-- end of form -->
                                         @else
@@ -99,4 +111,6 @@
     </div><!-- /.container-fluid -->
 </section>
 <!-- /.content -->
+
+
 @endsection

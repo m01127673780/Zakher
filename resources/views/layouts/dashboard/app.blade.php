@@ -23,6 +23,10 @@
     <link rel="stylesheet" href="{{asset('dashboardAssets/plugins/daterangepicker/daterangepicker.css')}}">
     <!-- Select2 -->
     <link rel="stylesheet" href="{{asset('dashboardAssets/plugins/select2/css/select2.min.css')}}">
+
+    <!-- JS Tree -->
+    <link rel="stylesheet" href="{{asset('dashboardAssets/plugins/jsTree/themes/default/style.css')}}">
+    
     <link rel="stylesheet"
         href="{{asset('dashboardAssets/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css')}}">
     @if (app()->getLocale() == "ar")
@@ -82,6 +86,10 @@
     <!-- Select2 -->
     <script src="{{asset('dashboardAssets/plugins/select2/js/select2.full.min.js')}}"></script>
     <script src="{{asset('dashboardAssets/plugins/moment/moment.min.js')}}"></script>
+
+    <!-- JS Tree -->
+    <script src="{{asset('dashboardAssets/plugins/jsTree/jstree.js')}}"></script>
+    <script src="{{asset('dashboardAssets/plugins/jsTree/jstree.wholerow.js')}}"></script>
 
     <!-- SweetAlert -->
     @include('sweetalert::alert')

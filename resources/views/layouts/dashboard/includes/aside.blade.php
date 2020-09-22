@@ -56,13 +56,22 @@
                   </li>
                   @endif
 
+                  @if (auth()->user()->hasPermission('read_countries'))
+                  <li class="nav-item">
+                      <a href="{{route('dashboard.countries.index')}}"
+                          class="nav-link {{ Request::is('*/dashboard/countries*') ? 'active' : '' }}"><i
+                              class="nav-icon fas fa-globe-asia"></i>
+                          <p>@Lang('admin.countries')</p>
+                      </a>
+                  </li>
+                  @endif
 
                   @if (auth()->user()->hasPermission('read_design_departments') ||
-                  auth()->user()->hasPermission('read_designs'))
+                  auth()->user()->hasPermission('read_design_ideas'))
                   <li
-                      class="nav-item has-treeview {{ Request::is('*/dashboard/design_departments*') ? 'menu-open' : '' }} {{ Request::is('*/dashboard/products*') ? 'menu-open' : '' }} {{ Request::is('*/dashboard/orders*') ? 'menu-open' : '' }} {{ Request::is('*/dashboard/empty*') ? 'menu-open' : '' }} {{ Request::is('*/dashboard/stock*') ? 'menu-open' : '' }} {{ Request::is('*/dashboard/expire*') ? 'menu-open' : '' }}">
+                      class="nav-item has-treeview {{ Request::is('*/dashboard/design_departments*') ? 'menu-open' : '' }} {{ Request::is('*/dashboard/design_ideas*') ? 'menu-open' : '' }}">
                       <a href="#"
-                          class="nav-link {{ Request::is('*/dashboard/design_departments*') ? 'active' : '' }} {{ Request::is('*/dashboard/products*') ? 'active' : '' }} {{ Request::is('*/dashboard/orders*') ? 'active' : '' }} {{ Request::is('*/dashboard/empty*') ? 'active' : '' }} {{ Request::is('*/dashboard/stock*') ? 'active' : '' }} {{ Request::is('*/dashboard/expire*') ? 'active' : '' }}">
+                          class="nav-link {{ Request::is('*/dashboard/design_departments*') ? 'active' : '' }} {{ Request::is('*/dashboard/design_ideas*') ? 'active' : '' }}">
                           <i class="nav-icon fas fa-images"></i>
                           <p>
                               @lang('admin.designs')
@@ -70,16 +79,28 @@
                           </p>
                       </a>
                       <ul class="nav nav-treeview ">
-                          @if (auth()->user()->hasPermission('read_design_departments'))
+
+                        @if (auth()->user()->hasPermission('read_design_departments'))
+                        <li class="nav-item">
+                            <a href="{{route('dashboard.design_departments.index')}}"
+                                class="nav-link {{ Request::is('*/dashboard/design_departments*') ? 'active' : '' }}"><i
+                                    class="nav-icon far fa-circle"></i>
+                                <p>@Lang('admin.design_departments')</p>
+                            </a>
+                        </li>
+                        @endif
+                        
+                          @if (auth()->user()->hasPermission('read_design_ideas'))
                           <li class="nav-item">
-                              <a href="{{route('dashboard.design_departments.index')}}"
-                                  class="nav-link {{ Request::is('*/dashboard/design_departments*') ? 'active' : '' }}"><i
+                              <a href="{{route('dashboard.design_ideas.index')}}"
+                                  class="nav-link {{ Request::is('*/dashboard/design_ideas*') ? 'active' : '' }}"><i
                                       class="nav-icon far fa-circle"></i>
-                                  <p>@Lang('admin.design_departments')</p>
+                                  <p>@Lang('admin.design_ideas')</p>
                               </a>
                           </li>
                           @endif
-                                                                                                                        
+                                
+                         
                       </ul>
                   </li>
                   @endif

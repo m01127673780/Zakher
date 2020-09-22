@@ -14,9 +14,11 @@ class CreateDesignDepsTable extends Migration
     public function up()
     {
         Schema::create('design_deps', function (Blueprint $table) {
-            $table->id();
-            $table->bigInteger('parent_id')->unsigned()->nullable();
-            $table->foreign('parent_id')->references('id')->on('design_deps')->onDelete('cascade');
+            $table->id(); 
+            $table->string('image')->default('not-found.jpg');
+            $table->boolean('status')->default(true);
+            $table->bigInteger('parent')->unsigned()->nullable();
+            $table->foreign('parent')->references('id')->on('design_deps')->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -9,7 +9,7 @@
                         <li class="{{ Route::currentRouteNamed('index') ? 'sale-noti' : '' }}"> <a href="{{ url('/') }}">@Lang('site.home')</a></li>
                         <li> <a data-toggle="modal" data-target=".bd-product-modal">@Lang('site.shop')</a>
                         </li>
-                        <li> <a data-toggle="modal" data-target=".bd-Designs-modal">@Lang('site.designs')</a>
+                        <li class="{{ Route::currentRouteNamed('Designs') ? 'sale-noti' : '' }}"> <a data-toggle="modal" data-target=".bd-Designs-modal">@Lang('site.designs')</a>
 
                         </li>
                         <li> <a href="my-ideas2.html">@Lang('site.my_ideas')</a></li>
@@ -141,3 +141,43 @@
         </nav>
     </div>
 </header>
+
+<div class="modal  bd-Designs-modal" tabindex="-1" role="dialog" aria-labelledby="bd-Designs-modal"
+aria-hidden="true">
+<div class="modal-dialog">
+    <div class="modal-content rounded-0">
+        <div class="modal-header bg5">
+            <h5>
+                @Lang('site.designs')</h5>
+            <button type="button" class="close ml-auto mt-2" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true" class="fa fa-close"></span>
+            </button>
+        </div>
+        <div class="modal-body">
+
+            <!-- Product Detail -->
+            <div class="container bgwhite">
+                <div class="row">
+                    @foreach ($all_departments as $dep)
+                        
+                    <div class="col-sm-6 col-md-3 col-lg-2 p-8 ">
+                        <div class="content">
+                            <a href="{{URL::to('Designs/'.$dep->id)}}" target="_blank">
+                                <div class="content-overlay"></div>
+                            <img class="content-image" src="{{$dep->image_path}}">
+                                <div class="content-details fadeIn-bottom">
+                                    <h3 class="content-title">{{$dep->name}}</h3>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    @endforeach
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+</div>

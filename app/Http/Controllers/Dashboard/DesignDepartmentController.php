@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\DesignDep;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\File;
 
 class DesignDepartmentController extends Controller
 {
@@ -29,7 +31,8 @@ class DesignDepartmentController extends Controller
     // Create
     public function create()
     {
-        return view('dashboard.design_departments.create');
+        $departments = DesignDep::all();
+        return view('dashboard.design_departments.create', compact('departments'));
     } // End of Create
 
     // Store
@@ -40,11 +43,26 @@ class DesignDepartmentController extends Controller
         foreach (config('translatable.locales') as $locale) {
 
             $rules += [$locale . '.name' => ['required', Rule::unique('design_dep_translations', 'name')]];
+            $rules += [$locale . '.slug' => ['required', Rule::unique('design_dep_translations', 'slug')]];
         } //end of for each
+
+        $rules += [
+            'status' => ['required', Rule::in(['0', '1'])],
+            'image' => 'image|required',
+        ];
 
         $request->validate($rules);
 
-        DesignDep::create($request->all());
+        $request_data = $request->except(['image']);
+
+        if ($request->image) {
+            Image::make($request->image)                
+                ->save('uploads/design_deps_images/' . $request->image->hashName(), 60);
+            $request_data['image'] = $request->image->hashName();
+        } //end of external if
+
+
+        DesignDep::create($request_data);
 
         return redirect()->route('dashboard.design_departments.index')->with('success', __('admin.added_successfully'));
     } // End of Store
@@ -54,8 +72,9 @@ class DesignDepartmentController extends Controller
     public function edit($id)
     {
         $department = DesignDep::findOrFail($id);
+        $departments = DesignDep::all();
 
-        return view('dashboard.design_departments.edit', compact('department'));
+        return view('dashboard.design_departments.edit', compact('department', 'departments'));
     } // End of Edit
 
 
@@ -68,11 +87,29 @@ class DesignDepartmentController extends Controller
 
         foreach (config('translatable.locales') as $locale) {
 
-            $rules += [$locale . '.name' => ['required', Rule::unique('design_dep_translations', 'name')]];
+            $rules += [$locale . '.name' => ['required', Rule::unique('design_dep_translations', 'name')->ignore($department->id, 'design_dep_id'),]];
+            $rules += [$locale . '.slug' => ['required', Rule::unique('design_dep_translations', 'slug')->ignore($department->id, 'design_dep_id')]];
         } //end of for each
 
+        $rules += [
+            'status' => ['required', Rule::in(['0', '1'])],
+            'image' => 'image',
+        ];
 
-        $department->update($request->all());
+        $request->validate($rules);
+
+        $request_data = $request->except(['image']);
+
+        if ($request->image) {
+            if ($department->image != 'not-found.jpg') {
+                File::delete('uploads/design_deps_images/' . $department->image);
+            } //end of inner if
+            Image::make($request->image)               
+                ->save('uploads/design_deps_images/' . $request->image->hashName(), 60);
+            $request_data['image'] = $request->image->hashName();
+        } //end of external if
+
+        $department->update($request_data);
 
         return redirect()->route('dashboard.design_departments.index')->with('success', __('admin.updated_successfully'));
     } // End of Update
@@ -83,8 +120,12 @@ class DesignDepartmentController extends Controller
     {
         $department = DesignDep::findOrFail($id);
 
-        $department->delete();
-        return redirect()->route('dashboard.design_departments.index')->with('success', __('admin.deleted_successfully'));
+        if ($department->image != 'not-found.jpg') {
+            File::delete('uploads/design_deps_images/' . $department->image);
+        } //end of if
 
+        $department->delete();
+
+        return redirect()->route('dashboard.design_departments.index')->with('success', __('admin.deleted_successfully'));
     } // End of Delete
 }

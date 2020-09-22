@@ -134,9 +134,26 @@ return [
     'description' => 'Site Description',
     'keywords' => 'Site Keywords',
     'logo' => 'Logo',
+    'status' => 'Status',
+    'department_id' => 'Department',
+    'flag' => 'Flag',
+    'code' => 'Code',
+    '' => '',
+    '' => '',
+    '' => '',
+    '' => '',
+    '' => '',
+    '' => '',
+    '' => '',
+    '' => '',
+    '' => '',
+    '' => '',
+    '' => '',
+    '' => '',
+    '' => '',
 
 
-   
+
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Language Lines
@@ -168,17 +185,19 @@ return [
 
     'attributes' => [
 
-        
-    'ar' => [
-        'name' => 'Name in Arabic',
-       
 
-    ],
-    'en' => [
-        'name' => 'Name in English',
-       
-    ],
-    
+        'ar' => [
+            'name' => 'Name in Arabic',
+            'slug' => 'URL Title in Arabic',
+            'description' => 'Description in Arabic',
+        ],
+        'en' => [
+            'name' => 'Name in English',
+            'slug' => 'URL Title in English',
+            'description' => 'Description in English',
+
+
+        ],
     ],
 
 ];

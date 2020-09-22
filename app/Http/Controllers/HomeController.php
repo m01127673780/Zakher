@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DesignDep;
 use App\Models\Setting;
 use Illuminate\Http\Request;
 
@@ -21,6 +22,8 @@ class HomeController extends Controller
     {
         $settings = Setting::first();
 
-        return view('website.index', compact('settings'));
+        $all_departments = DesignDep::where('parent', null)->get();
+
+        return view('website.index', compact('settings', 'all_departments'));
     }
 }

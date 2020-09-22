@@ -18,9 +18,10 @@ class CreateDesignDepTranslationsTable extends Migration
             $table->bigInteger('design_dep_id')->unsigned();
             $table->string('locale')->index();
             $table->string('name')->nullable();
-
+            $table->string('slug')->nullable();
             $table->unique(['design_dep_id', 'locale']);
             $table->foreign('design_dep_id')->references('id')->on('design_deps')->onDelete('cascade');
+
             $table->timestamps();
         });
     }

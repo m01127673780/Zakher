@@ -24,6 +24,7 @@ Route::group(
     function () {
 
         Route::get('/', 'HomeController@index')->name('index');
+        Route::get('/Designs/{slug}', 'PagesController@designs')->name('Designs');
 
         Auth::routes(['register' => false]);
     }

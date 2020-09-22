@@ -105,7 +105,7 @@
                                     <div class="card card-primary card-outline">
                                         <div class="card-body">
                                             @php
-                                            $models = ['admins', 'settings', 'design_departments'];
+                                            $models = ['admins', 'settings', 'design_departments', 'design_ideas'];
                                             $maps = ['create', 'read', 'update', 'delete'];
                                             @endphp
                                             <ul class="nav nav-tabs" id="custom-content-below-tab" role="tablist">

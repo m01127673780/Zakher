@@ -51,6 +51,17 @@ return [
     'departments' => 'Departments',
     'designs' => 'Designs',
     'home' => 'Home',
+    'main_department' => 'Main Department',
+    'status' => 'Status',
+    'active' => 'Active',
+    'in_active' => 'In Active',
+    'design_ideas' => 'Design Ideas',
+    'department' => 'Department',
+    'images' => 'Images',
+    'choose_images' => 'Choose Images',
+    'countries' => 'Countries',
+    'flag' => 'Flag',
+    'code' => 'Code',
     '' => '',
     '' => '',
     '' => '',
@@ -62,13 +73,17 @@ return [
    
     
     'ar' => [
-        'name' => 'The Name in Arabic',
+        'name' => 'Name in Arabic',
+        'slug' => 'URL Title in Arabic',
+        'description' => 'Description in Arabic',
        
 
     ],
     'en' => [
-        'name' => 'The Name in English',
-       
+        'name' => 'Name in English',
+        'slug' => 'URL Title in English',
+        'description' => 'Description in English',
+
     ],
 
 ];

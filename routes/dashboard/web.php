@@ -22,6 +22,15 @@ Route::group(
 
             // Design Departments Routes    
             Route::resource('design_departments', 'DesignDepartmentController');
+
+             // Design Ideas Routes    
+             Route::resource('design_ideas', 'DesignIdeaController');
+             Route::put('design_ideas/updateImage/{id}', 'DesignIdeaController@updateImage')->name('design_ideas.updateImage');  
+             Route::delete('design_ideas/deleteImage/{id}', 'DesignIdeaController@deleteImage')->name('design_ideas.deleteImage'); 
+             
+              // Countries Routes    
+            Route::resource('countries', 'CountryController');
+
         });
         // End of Dashboard Routes
 

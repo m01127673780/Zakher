@@ -7,5 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 class DesignDepTranslation extends Model
 {
     public $timestamps = false;
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'slug'];
 }

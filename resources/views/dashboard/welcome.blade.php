@@ -1,7 +1,7 @@
 @extends('layouts.dashboard.app')
 
 @section('title')
-@Lang('admin.dashboard')
+@Lang('admin.home')
 @endsection
 
 @section('content')
