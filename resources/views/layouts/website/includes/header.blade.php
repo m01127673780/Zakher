@@ -9,7 +9,7 @@
                         <li class="{{ Route::currentRouteNamed('index') ? 'sale-noti' : '' }}"> <a href="{{ url('/') }}">@Lang('site.home')</a></li>
                         <li> <a data-toggle="modal" data-target=".bd-product-modal">@Lang('site.shop')</a>
                         </li>
-                        <li class="{{ Route::currentRouteNamed('Designs') ? 'sale-noti' : '' }}"> <a data-toggle="modal" data-target=".bd-Designs-modal">@Lang('site.designs')</a>
+                        <li class="{{ Route::currentRouteNamed('Designs') ? 'sale-noti' : ''}} {{Route::currentRouteNamed('singleDesign') ? 'sale-noti' : '' }}"> <a data-toggle="modal" data-target=".bd-Designs-modal">@Lang('site.designs')</a>
 
                         </li>
                         <li> <a href="my-ideas2.html">@Lang('site.my_ideas')</a></li>
@@ -162,7 +162,16 @@ aria-hidden="true">
                         
                     <div class="col-sm-6 col-md-3 col-lg-2 p-8 ">
                         <div class="content">
-                            <a href="{{URL::to('Designs/'.$dep->id)}}" target="_blank">
+                            
+                            @if (app()->getLocale() == "ar")
+                            <a href="{{ URL::to(LaravelLocalization::getURLFromRouteNameTranslated('ar',
+                                'routes.designs', ['slug' => $dep->slug]) ) }}" target="_blank">
+                            @else
+                            <a href="{{ URL::to(LaravelLocalization::getURLFromRouteNameTranslated('en',
+                                'routes.designs', ['slug' => $dep->slug]) ) }}" target="_blank">
+                            @endif
+
+                            
                                 <div class="content-overlay"></div>
                             <img class="content-image" src="{{$dep->image_path}}">
                                 <div class="content-details fadeIn-bottom">

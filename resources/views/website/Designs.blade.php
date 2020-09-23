@@ -61,7 +61,7 @@
                         <div class="block2-btn-addcart w-size1 trans-0-4 d-flex">
                             <!-- Button -->
 
-                            <a class="flex-c-m size2  btn btn-white btn-primary mr-2" href="photo-details.html">
+                            <a class="flex-c-m size2  btn btn-white btn-primary mr-2" href=" {{URL::to('Designs/'.$design_department->id.'/'.$idea->id)}} ">
                                 <i class="fa fa-search" aria-hidden="true"></i> View
                             </a>
                             <button class="flex-c-m size2  btn btn-white btn-primary mr-2" data-toggle="modal"

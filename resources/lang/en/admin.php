@@ -62,8 +62,10 @@ return [
     'countries' => 'Countries',
     'flag' => 'Flag',
     'code' => 'Code',
-    '' => '',
-    '' => '',
+    'sliders' => 'Slideshow',
+    'url' => 'URL',
+    'rank' => 'Rank',
+    'title' => 'Title',
     '' => '',
     '' => '',
     '' => '',
@@ -76,6 +78,7 @@ return [
         'name' => 'Name in Arabic',
         'slug' => 'URL Title in Arabic',
         'description' => 'Description in Arabic',
+        'title' => 'Title in Arabic',
        
 
     ],
@@ -83,6 +86,7 @@ return [
         'name' => 'Name in English',
         'slug' => 'URL Title in English',
         'description' => 'Description in English',
+        'title' => 'Title in English',
 
     ],
 

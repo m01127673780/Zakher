@@ -12,7 +12,7 @@ class PagesController extends Controller
 {
     public function designs($slug)
     {
-        $design_department = DesignDep::where('id', $slug)->firstOrFail();
+        $design_department = DesignDep::whereTranslationLike('slug', $slug)->firstOrFail();
 
         $all_departments = DesignDep::where('parent', null)->get();
 
@@ -27,6 +27,24 @@ class PagesController extends Controller
             'design_department',
             'sub_departments',
             'designs_ideas',
+            'all_departments'
+        ));
+    }
+
+    public function singleDesign($slug, $id)
+    {
+        $design_idea = DesignIdea::findOrFail($id);
+
+        $all_departments = DesignDep::where('parent', null)->get();
+
+        $settings = Setting::first();
+        
+        $idea_images = DesignIdeaImage::where('design_idea_id',  $design_idea->id)->get();
+
+        return view('website.singleDesign', compact(
+            'settings',
+            'design_idea',
+            'idea_images',
             'all_departments'
         ));
     }

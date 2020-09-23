@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\DesignDep;
 use App\Models\Setting;
+use App\Models\Slider;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -24,6 +25,8 @@ class HomeController extends Controller
 
         $all_departments = DesignDep::where('parent', null)->get();
 
-        return view('website.index', compact('settings', 'all_departments'));
+        $slides = Slider::orderBy('rank', 'asc')->get();
+
+        return view('website.index', compact('settings', 'all_departments', 'slides'));
     }
 }

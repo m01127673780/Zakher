@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
 use Astrotomic\Translatable\Translatable;
 
+use \Mcamara\LaravelLocalization\Interfaces\LocalizedUrlRoutable as SlugMacamara;
+
 class DesignDep extends Model implements TranslatableContract
 {
     use Translatable;
@@ -29,5 +31,7 @@ class DesignDep extends Model implements TranslatableContract
     {
         return asset('uploads/design_deps_images/' . $this->image);
     } //end of get image path
+
+    
 
 }

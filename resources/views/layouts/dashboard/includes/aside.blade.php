@@ -66,6 +66,16 @@
                   </li>
                   @endif
 
+                  @if (auth()->user()->hasPermission('read_sliders'))
+                  <li class="nav-item">
+                      <a href="{{route('dashboard.sliders.index')}}"
+                          class="nav-link {{ Request::is('*/dashboard/sliders*') ? 'active' : '' }}"><i
+                              class="nav-icon fas fa-camera"></i>
+                          <p>@Lang('admin.sliders')</p>
+                      </a>
+                  </li>
+                  @endif
+
                   @if (auth()->user()->hasPermission('read_design_departments') ||
                   auth()->user()->hasPermission('read_design_ideas'))
                   <li

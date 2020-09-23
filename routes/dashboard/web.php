@@ -31,6 +31,9 @@ Route::group(
               // Countries Routes    
             Route::resource('countries', 'CountryController');
 
+             // Sliders Routes    
+             Route::resource('sliders', 'SliderController');
+
         });
         // End of Dashboard Routes
 

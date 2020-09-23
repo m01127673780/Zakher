@@ -9,6 +9,7 @@ return [
             'design_departments' => 'c,r,u,d',
             'design_ideas' => 'c,r,u,d',
             'countries' => 'c,r,u,d',
+            'sliders' => 'c,r,u,d',
         ],
         
         'admin' => [],

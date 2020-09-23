@@ -1,8 +1,11 @@
 <?php 
 
 return [
-    'designs' => 'التصميمات/{slug}',
-    'designs.show' => 'التصميمات/{slug}/{slug}',
+
+    'designs' => 'Designs/{slug}',
+    'designs.show' => 'Designs/{slug}/{slug}',
+
+    '' => '',
     '' => '',
     '' => '',
     '' => '',

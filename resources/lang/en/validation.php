@@ -138,6 +138,7 @@ return [
     'department_id' => 'Department',
     'flag' => 'Flag',
     'code' => 'Code',
+    'rank' => 'Rank',
     '' => '',
     '' => '',
     '' => '',
@@ -190,11 +191,13 @@ return [
             'name' => 'Name in Arabic',
             'slug' => 'URL Title in Arabic',
             'description' => 'Description in Arabic',
+            'title' => 'Title in Arabic',
         ],
         'en' => [
             'name' => 'Name in English',
             'slug' => 'URL Title in English',
             'description' => 'Description in English',
+            'title' => 'Title in English',
 
 
         ],

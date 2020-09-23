@@ -18,13 +18,18 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 Route::group(
     [
         'prefix' => LaravelLocalization::setLocale(),
-        'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath']
+        'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath', 'localize']
     ],
 
     function () {
 
         Route::get('/', 'HomeController@index')->name('index');
-        Route::get('/Designs/{slug}', 'PagesController@designs')->name('Designs');
+
+        //Route::get('/Designs/{slug}', 'PagesController@designs')->name('Designs');
+        Route::get('/Designs/{slug}/{id}', 'PagesController@singleDesign')->name('singleDesign');
+
+        Route::get(LaravelLocalization::transRoute('routes.designs'), 'PagesController@designs')->name('Designs');
+        //Route::get(LaravelLocalization::transRoute('routes.designs.show'), 'PagesController@singleDesign')->name('singleDesign');
 
         Auth::routes(['register' => false]);
     }
