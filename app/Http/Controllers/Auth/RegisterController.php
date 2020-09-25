@@ -5,9 +5,13 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use App\Models\Member;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class RegisterController extends Controller
 {
@@ -39,6 +43,7 @@ class RegisterController extends Controller
     public function __construct()
     {
         $this->middleware('guest');
+        $this->middleware('guest:member');
     }
 
     /**
@@ -69,5 +74,42 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+    }
+
+    public function showMemberRegisterForm()
+    {
+        $randomInteger1 = substr(mt_rand(), 0, 2);
+        $randomInteger2 = substr(mt_rand(), 0, 2);
+
+        $captchaQuestion = sprintf('%s + %s = ?', $randomInteger1, $randomInteger2);
+        $captchaAnswer = $randomInteger1 + $randomInteger2;
+
+        Session::put('captcha_answer', $captchaAnswer);
+
+        return view('memberAuth.login', compact('captchaQuestion'));
+    }
+
+    protected function createMember(Request $request)
+    {
+        //$this->validator($request->all())->validate();
+
+        $this->validate($request, [
+            'name'   => 'required|min:3',
+            'email'   => 'required|email|unique:members',
+            'password' => 'required',
+            'human' => 'required|numeric|in:' . Session::get('captcha_answer'),
+
+        ]);
+
+        $member = Member::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
+        return response()->json([
+            'success'  => __('site.successfully_registered')
+        ]);
+
+        Auth::loginUsingId($member->id);
     }
 }

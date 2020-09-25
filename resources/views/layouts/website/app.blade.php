@@ -11,38 +11,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content=" ">
-    <!--    ------------------------------------------------------------------------------------------>
-    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.css">
-    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
-
-    <script src="https://unpkg.com/swiper/swiper-bundle.js"></script>
-    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-    <script type="module">
-        import Swiper from 'https://unpkg.com/swiper/swiper-bundle.esm.browser.min.js'
-
-
-        var mySwiper = new Swiper('.swiper-container', {
-            // Optional parameters
-            direction: 'horizontal',
-            loop: true,
-
-            // If we need pagination
-            pagination: {
-                el: '.swiper-pagination',
-            },
-
-            // Navigation arrows
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
-
-            // And if we need scrollbar
-            scrollbar: {
-                el: '.swiper-scrollbar',
-            },
-        })
-    </script>
 
     <!--  start owl crousel ---------------------------------------------------------------------------->
 
@@ -117,7 +85,10 @@
 
     <script type="text/javascript" src="{{asset('siteAssets/vendor/countdowntime/countdowntime.js')}}"></script>
 
-
+    <!-- SweetAlert -->
+    @include('sweetalert::alert')
+    <script src="{{asset('vendor/sweetalert/sweetalert.all.js')}}"></script>
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
 
 

@@ -20,6 +20,11 @@ body.rtl {
 .rtl a,
 .rtl p {
     font-family: 'Cairo-Regular-1' !important;
+    text-align:right;
+}
+
+.rtl select, .rtl option{
+    font-family: 'Cairo-Regular-1' !important;
 }
 
 .rtl .block2-btn-addcart {
@@ -132,7 +137,7 @@ body.rtl {
     right: 15px;
 }
 
-.rtl .fa-chevron-down {
+.rtl .drop-box .fa-chevron-down {
     margin-left: 0;
     margin-right: 110px;
 }
@@ -153,14 +158,14 @@ body.rtl {
     padding: 0px 0px 0px 5px;
 }
 
-.rtl .pagination-lg .page-item:first-child .page-link {
+.rtl .pagination .page-item:first-child .page-link {
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
     border-top-right-radius: .3rem;
     border-bottom-right-radius: .3rem;
 }
 
-.rtl .pagination-lg .page-item:last-child .page-link {
+.rtl .pagination .page-item:last-child .page-link {
     border-top-left-radius: .3rem;
     border-bottom-left-radius: .3rem;
     border-top-right-radius: 0;
@@ -209,6 +214,15 @@ body.rtl {
 .rtl .m-text1 {
     font-family: 'Cairo-Regular-1' !important;
     letter-spacing: 0;
+}
+
+.rtl .s-text7{
+    font-family: 'Cairo-Regular-1' !important;
+
+}
+
+.rtl .btn-white, .rtl .btn-primary{
+    font-family: 'Cairo-Regular-1' !important;
 }
 
 @media (max-width: 991px) {

@@ -157,83 +157,100 @@
 
 @section('content')
 
-    <!-- Design Detail -->
-    <div class="container bgwhite m-t-50 ">
-        <div class="flex-w flex-sb">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <div class="app-figure row photo_details" id="zoom-fig">
-                    <div class="col-lg-8 col-md-12 col-sm-12">
-                        <div class="row">
-                            <a id="Zoom-1" class="MagicZoom" href="{!! $design_idea->image_path.'/'.$design_idea->first_image->image !!}">
-                                <img src="{!! $design_idea->image_path.'/'.$design_idea->first_image->image !!}" alt="" />
-                            </a>
-                        </div>
-                        <div class="row">
-                            <!--                ------------------------------------------>
-                            <aside class="content_allbuttons_product_detail">
-                                <button type="button" class="btn btn-blakk buttons_share_pro" data-toggle="modal"
-                                    data-target=".bd-share-modal"><i class="fa fa-share-square-o"
-                                        aria-hidden="true"></i>
-                                    @Lang('site.share')</button>
-                                <button type="button" class="btn btn-blakk buttons_share_pro " data-toggle="modal"
-                                    data-target=".bd-save-modal" title="@lang('site.save_to_my_ideas')"><i class="fa fa-heart-o"></i>
-                                    @Lang('site.save')</button>
-
-                                <button type="button" class="btn  btn-blakk buttons_share_pro" data-toggle="modal"
-                                    data-target=".bd-question-modal">
-                                    <i class="fa fa-quora" aria-hidden="true"></i> @Lang('site.ask_me')
-                                </button>
-                                <button type="button" class="btn btn-blakk buttons_share_pro" data-toggle="modal"
-                                    data-target=".bd-email-modal">
-                                    <!-- <i class="fa fa-whatsapp" aria-hidden="true"></i> -->
-                                    <img class=" img_whatsapp_icon whatsapp_icon" style=" width: 16px !important;
-                                transform: scale(1.5) !important;" src="{{asset('siteAssets/images/whatsapp.png')}}"> @Lang('site.whatsapp')</button>
-
-                            </aside>
-                            <!--                ------------------------------------------>
-                        </div>
+<!-- Design Detail -->
+<div class="container bgwhite m-t-50 ">
+    <div class="flex-w flex-sb">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="app-figure row photo_details" id="zoom-fig">
+                <div class="col-lg-8 col-md-12 col-sm-12">
+                    <div class="row">
+                        <a id="Zoom-1" class="MagicZoom"
+                            href="{!! $design_idea->image_path.'/'.$design_idea->first_image->image !!}">
+                            <img src="{!! $design_idea->image_path.'/'.$design_idea->first_image->image !!}" alt="" />
+                        </a>
                     </div>
+                    <div class="row">
+                        <!--                ------------------------------------------>
+                        <aside class="content_allbuttons_product_detail">
+                            <button type="button" class="btn btn-blakk buttons_share_pro" data-toggle="modal"
+                                data-target=".bd-share-modal"><i class="fa fa-share-square-o" aria-hidden="true"></i>
+                                @Lang('site.share')</button>
+                            <button type="button" class="btn btn-blakk buttons_share_pro " data-toggle="modal"
+                                data-target=".bd-save-modal" title="@lang('site.save_to_my_ideas')"><i
+                                    class="fa fa-heart-o"></i>
+                                @Lang('site.save')</button>
 
-                    <div class="col-lg-4 col-md-12 col-sm-12">
-                        <div class="selectors ">
-                            <div class="row">
-                                @foreach ($idea_images as $image)
-                                <div class="col-md-3 col-sm-3 col-6 col-lg-6">
-                                    <a data-zoom-id="Zoom-1" href="{{$image->image_path}}">
-                                        <img src="{{$image->image_path}}" />
-                                    </a>
-                                </div>
-                                @endforeach
-                                
-                            </div>
+                            <button type="button" class="btn  btn-blakk buttons_share_pro" data-toggle="modal"
+                                data-target=".bd-question-modal">
+                                <i class="fa fa-quora" aria-hidden="true"></i> @Lang('site.ask_me')
+                            </button>
+                            <button type="button" class="btn btn-blakk buttons_share_pro" data-toggle="modal"
+                                data-target=".bd-email-modal">
+                                <!-- <i class="fa fa-whatsapp" aria-hidden="true"></i> -->
+                                <img class=" img_whatsapp_icon whatsapp_icon" style=" width: 16px !important;
+                                transform: scale(1.5) !important;" src="{{asset('siteAssets/images/whatsapp.png')}}">
+                                @Lang('site.whatsapp')</button>
 
-                            <div class="row">
-                                <button type="button" class="btn btn-blakk see_more" data-toggle="modal">
-                                    @Lang('site.see_more_photos')</button>
-                            </div>
-                        </div>
+                        </aside>
+                        <!--                ------------------------------------------>
                     </div>
                 </div>
-            </div>
 
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 p-b-60">
-                <div class="row">
-                    <div class="col-lg-8 col-md-8 col-sm-12">                        
+                <div class="col-lg-4 col-md-12 col-sm-12">
+                    <div class="selectors ">
                         <div class="row">
-                            <h4>
-                                {{$design_idea->name}}
-                            </h4>
-                            <p class="s-text8">
-                                {{$design_idea->description}}
-
-                            </p>
+                            @foreach ($idea_images as $image)
+                            <div class="col-md-3 col-sm-3 col-6 col-lg-6 image_block">
+                                <a data-zoom-id="Zoom-1" href="{{$image->image_path}}">
+                                    <img src="{{$image->image_path}}" />
+                                </a>
+                            </div>
+                            @endforeach
 
                         </div>
+
+                        <div class="row">
+                            <button type="button" class="btn btn-blakk see_more" data-toggle="modal">
+                                @Lang('site.see_more_photos')</button>
+                        </div>
                     </div>
-                    
                 </div>
             </div>
         </div>
+
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 p-b-60">
+            <div class="row">
+                <div class="col-lg-8 col-md-8 col-sm-12">
+                    <div class="row">
+                        <h4 class="m-b-20">
+                            {{$design_idea->name}}
+                        </h4>
+                        <p class="s-text8">
+                            {{$design_idea->description}}
+
+                        </p>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
     </div>
+</div>
+
+@push('scripts')
+<script>
+    $(".image_block").slice(0, 2).show(); //showing 3 div
+
+    $(".see_more").on("click", function () {
+        $(".image_block:hidden").slice(0, 2).show(); //showing 3 hidden div on click
+
+        if ($(".image_block:hidden").length == 0) {
+            $(".see_more").fadeOut(); //this will hide
+            //button when length is 0
+        }
+    })
+</script>
+@endpush
 
 @endsection

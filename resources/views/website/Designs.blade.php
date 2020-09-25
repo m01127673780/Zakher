@@ -62,24 +62,23 @@
                             <!-- Button -->
 
                             <a class="flex-c-m size2  btn btn-white btn-primary mr-2" href=" {{URL::to('Designs/'.$design_department->id.'/'.$idea->id)}} ">
-                                <i class="fa fa-search" aria-hidden="true"></i> View
+                                <i class="fa fa-search" aria-hidden="true"></i> @Lang('site.view')
                             </a>
                             <button class="flex-c-m size2  btn btn-white btn-primary mr-2" data-toggle="modal"
                                 data-target=".bd-share-modal"><i class="fa fa-share-square-o" aria-hidden="true"></i>
-                                Share</button>
+                                @Lang('site.share')</button>
 
                             <button class="flex-c-m size2  btn btn-white btn-primary mr-2" data-toggle="modal"
                                 data-target=".bd-email-modal" title="Save to Ideabook">
-                                <i class="fa fa-heart" aria-hidden="true"></i> Save
+                                <i class="fa fa-heart" aria-hidden="true"></i> @Lang('site.save')
                             </button>
                         </div>
                     </div>
                     <div class="color-overlay"></div>
                 </div>
                 <h3>{{$idea->name}}</h3>
-                <p>{!!substr($idea->description ,0, 145)."......"!!}</p>
-                <a href="#idea{{$idea->id}}" data-toggle="modal"
-                    data-target="#idea{{$idea->id}}">@Lang('site.read_more')</a>
+                <p>{{$idea->description}}</p>
+                <a href="javascript:void();" class="read_more_btn">@Lang('site.read_more') </a>
 
             </div>
 
@@ -113,10 +112,22 @@
 
         </div>
         <div class="row">
-
+            {{$designs_ideas->links()}}
         </div>
     </div>
 </div>
 
+@push('scripts')
 
+<script>
+    // Read More Button
+    $(".read_more_btn").on('click', function(){
+        $(this).parent().toggleClass("showContent");
+
+        var replaceText = $(this).parent().hasClass("showContent") ? "@Lang('site.read_less')" : "@Lang('site.read_more')";
+        $(this).text(replaceText);
+    })
+</script>
+    
+@endpush
 @endsection

@@ -1,15 +1,19 @@
 <header class="header1">
     <div class="container-menu-header">
 
-        <div class="wrap_header"> <a href="index.html" class="logo"> <img src="{{ $settings->image_path }}" alt="IMG-LOGO">
+        <div class="wrap_header"> <a href="index.html" class="logo"> <img src="{{ $settings->image_path }}"
+                    alt="IMG-LOGO">
             </a>
             <div class="wrap_menu">
                 <nav class="menu">
                     <ul class="main_menu">
-                        <li class="{{ Route::currentRouteNamed('index') ? 'sale-noti' : '' }}"> <a href="{{ url('/') }}">@Lang('site.home')</a></li>
+                        <li class="{{ Route::currentRouteNamed('index') ? 'sale-noti' : '' }}"> <a
+                                href="{{ url('/') }}">@Lang('site.home')</a></li>
                         <li> <a data-toggle="modal" data-target=".bd-product-modal">@Lang('site.shop')</a>
                         </li>
-                        <li class="{{ Route::currentRouteNamed('Designs') ? 'sale-noti' : ''}} {{Route::currentRouteNamed('singleDesign') ? 'sale-noti' : '' }}"> <a data-toggle="modal" data-target=".bd-Designs-modal">@Lang('site.designs')</a>
+                        <li
+                            class="{{ Route::currentRouteNamed('Designs') ? 'sale-noti' : ''}} {{Route::currentRouteNamed('singleDesign') ? 'sale-noti' : '' }}">
+                            <a data-toggle="modal" data-target=".bd-Designs-modal">@Lang('site.designs')</a>
 
                         </li>
                         <li> <a href="my-ideas2.html">@Lang('site.my_ideas')</a></li>
@@ -19,10 +23,42 @@
                 </nav>
             </div>
             <div class="header-icons">
-
                 <div class="header-wrapicon2">
-                    <a class="header-icon1  sign-in" href="login.html"><i class="fa fa-user" aria-hidden="true"></i>
+                    @if(Auth::guard('member')->check())
+                    <ul>
+                        <li class="nav-item dropdown">
+                            <a href="#" id="navbarDropdown" class="header-icon1  sign-in nav-link dropdown-toggle"
+                                href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                v-pre>
+                                {{ Auth::guard('member')->user()->name }} <span class="caret"></span></a>
+
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('showMember', Auth::guard('member')->user()->id) }}"
+                                     >
+                                    @Lang('site.my_profile')
+                                </a>
+
+                                <a class="dropdown-item" href="{{ route('editMember', Auth::guard('member')->user()->id) }}">
+                                    @Lang('site.edit_profile_info')
+                                </a>
+
+                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                     document.getElementById('logout-form').submit();">
+                                    @Lang('admin.logout')
+                                </a>
+
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                    style="display: none;">
+                                    @csrf
+                                </form>
+                            </div>
+                        </li>
+                    </ul>
+                    @else
+                    <a class="header-icon1  sign-in" href="{{ route('memberAuth.login') }}"><i class="fa fa-user"
+                            aria-hidden="true"></i>
                         @Lang('site.sign_in') </a>
+                    @endif
                 </div>
                 <span class="linedivide1"></span>
                 <div class="dropdown">
@@ -125,13 +161,15 @@
     <div class="wrap-side-menu">
         <nav class="side-menu">
             <ul class="main-menu">
-                <li class="item-menu-mobile {{ Route::currentRouteNamed('index') ? 'sale-noti' : '' }}"> <a href="{{ url('/') }}">@Lang('site.home')</a></li>
+                <li class="item-menu-mobile {{ Route::currentRouteNamed('index') ? 'sale-noti' : '' }}"> <a
+                        href="{{ url('/') }}">@Lang('site.home')</a></li>
 
 
                 <li> <a data-toggle="modal" data-target=".bd-product-modal">@Lang('site.shop')</a>
 
                 </li>
-                <li class="item-menu-mobile"><a data-toggle="modal" data-target=".bd-Designs-modal">@Lang('site.designs')</a>
+                <li class="item-menu-mobile"><a data-toggle="modal"
+                        data-target=".bd-Designs-modal">@Lang('site.designs')</a>
                 </li>
                 <li class="item-menu-mobile"> <a href="my-ideas.html">@Lang('site.my_ideas')</a></li>
                 <!--                    <li class="item-menu-mobile"> <a href="about.html">About</a></li>-->
@@ -142,51 +180,50 @@
     </div>
 </header>
 
-<div class="modal  bd-Designs-modal" tabindex="-1" role="dialog" aria-labelledby="bd-Designs-modal"
-aria-hidden="true">
-<div class="modal-dialog">
-    <div class="modal-content rounded-0">
-        <div class="modal-header bg5">
-            <h5>
-                @Lang('site.designs')</h5>
-            <button type="button" class="close ml-auto mt-2" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true" class="fa fa-close"></span>
-            </button>
-        </div>
-        <div class="modal-body">
+<div class="modal  bd-Designs-modal" tabindex="-1" role="dialog" aria-labelledby="bd-Designs-modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content rounded-0">
+            <div class="modal-header bg5">
+                <h5>
+                    @Lang('site.designs')</h5>
+                <button type="button" class="close ml-auto mt-2" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" class="fa fa-close"></span>
+                </button>
+            </div>
+            <div class="modal-body">
 
-            <!-- Product Detail -->
-            <div class="container bgwhite">
-                <div class="row">
-                    @foreach ($all_departments as $dep)
-                        
-                    <div class="col-sm-6 col-md-3 col-lg-2 p-8 ">
-                        <div class="content">
-                            
-                            @if (app()->getLocale() == "ar")
+                <!-- Product Detail -->
+                <div class="container bgwhite">
+                    <div class="row">
+                        @foreach ($all_departments as $dep)
+
+                        <div class="col-sm-6 col-md-3 col-lg-2 p-8 ">
+                            <div class="content">
+
+                                {{-- @if (app()->getLocale() == "ar")
                             <a href="{{ URL::to(LaravelLocalization::getURLFromRouteNameTranslated('ar',
                                 'routes.designs', ['slug' => $dep->slug]) ) }}" target="_blank">
-                            @else
-                            <a href="{{ URL::to(LaravelLocalization::getURLFromRouteNameTranslated('en',
+                                @else
+                                <a href="{{ URL::to(LaravelLocalization::getURLFromRouteNameTranslated('en',
                                 'routes.designs', ['slug' => $dep->slug]) ) }}" target="_blank">
-                            @endif
+                                    @endif --}}
 
-                            
-                                <div class="content-overlay"></div>
-                            <img class="content-image" src="{{$dep->image_path}}">
-                                <div class="content-details fadeIn-bottom">
-                                    <h3 class="content-title">{{$dep->name}}</h3>
-                                </div>
-                            </a>
+                                    <a href="{{ URL::to('/Designs' . '/' .$dep->id)}}" target="_blank">
+                                        <div class="content-overlay"></div>
+                                        <img class="content-image" src="{{$dep->image_path}}">
+                                        <div class="content-details fadeIn-bottom">
+                                            <h3 class="content-title">{{$dep->name}}</h3>
+                                        </div>
+                                    </a>
+                            </div>
                         </div>
+
+                        @endforeach
+
                     </div>
-
-                    @endforeach
-
                 </div>
             </div>
-        </div>
 
+        </div>
     </div>
-</div>
 </div>

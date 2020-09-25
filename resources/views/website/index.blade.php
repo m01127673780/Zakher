@@ -4,6 +4,12 @@
 @Lang('site.home')
 @endsection
 
+@push('css')
+        <!--  Swiper Slider  ------------------------------------------------------------------------------------------>
+        <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.css">
+        <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+   
+@endpush
 
 @section('content')
 
@@ -33,4 +39,35 @@
 </section>
 
 
+@push('scripts')
+        
+<script src="https://unpkg.com/swiper/swiper-bundle.js"></script>
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script type="module">
+    import Swiper from 'https://unpkg.com/swiper/swiper-bundle.esm.browser.min.js'
+
+
+    var mySwiper = new Swiper('.swiper-container', {
+        // Optional parameters
+        direction: 'horizontal',
+        loop: true,
+
+        // If we need pagination
+        pagination: {
+            el: '.swiper-pagination',
+        },
+
+        // Navigation arrows
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+
+        // And if we need scrollbar
+        scrollbar: {
+            el: '.swiper-scrollbar',
+        },
+    })
+</script>
+@endpush
 @endsection

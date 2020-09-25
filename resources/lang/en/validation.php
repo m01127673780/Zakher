@@ -139,7 +139,9 @@ return [
     'flag' => 'Flag',
     'code' => 'Code',
     'rank' => 'Rank',
-    '' => '',
+    'member_name' => 'Name',
+    'member_email' => 'Email',
+    'member_password' => 'Password',
     '' => '',
     '' => '',
     '' => '',
@@ -170,6 +172,8 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
+
+        
     ],
 
 
